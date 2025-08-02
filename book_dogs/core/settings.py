@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "users",
     "book_sessions",
-    "auth_jwt",
 ]
 
 AUTH_USER_MODEL = "users.User"
