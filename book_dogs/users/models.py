@@ -1,14 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
 
-class User(models.Model):
-    name = models.CharField(max_length=255)
+class User(AbstractUser):
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     @property
     def total_books(self):
@@ -19,6 +16,12 @@ class User(models.Model):
     def finished_books(self):
         """Get finished book sessions for this user"""
         return self.book_sessions.filter(status="finished").count()
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
+
+    def __str__(self):
+        return self.email
 
 
 class Profile(models.Model):
