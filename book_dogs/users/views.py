@@ -9,7 +9,7 @@ from rest_framework.exceptions import PermissionDenied
 from .permissions import IsOwner
 
 
-# Register endpoint
+# Register endpoint, basically creating an user.
 class UserRegisterView(generics.CreateAPIView):
     serializer_class = UserRegistrationSerializer
     permission_classes = [AllowAny]
