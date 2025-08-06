@@ -6,7 +6,7 @@ from .serializers import UserRegistrationSerializer, ProfileSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import User, Profile
 from rest_framework.exceptions import PermissionDenied
-from .permissions import IsOwner
+from permissions.is_owner import IsOwner
 
 
 # Register endpoint, basically creating an user.
