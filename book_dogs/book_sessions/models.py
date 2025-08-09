@@ -18,19 +18,6 @@ class BookSession(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    @property
-    def progress(self):
-        """Calculate progress as percentage of pages read from all reading sessions"""
-        if self.page_number <= 0:
-            return 0
-
-        total_pages_read = sum(
-            session.pages_read or 0 for session in self.reading_sessions.all()
-        )
-
-        progress_percentage = min((total_pages_read / self.page_number) * 100, 100)
-        return int(progress_percentage)
-
 
 class ReadingSession(models.Model):
     book_session = models.ForeignKey(
@@ -43,10 +30,3 @@ class ReadingSession(models.Model):
     is_finished = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    @property
-    def duration(self):
-        """Calculate duration as end_time - start_time"""
-        if self.end_time and self.start_time:
-            return self.end_time - self.start_time
-        return None
